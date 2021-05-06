@@ -1,0 +1,13 @@
+---
+
+- name: Copy over the chronyd configuration
+  template: src=./files/chrony.conf dest=/etc/chrony.conf
+
+- name: Make sure chrony is stopped
+  service: name=chronyd state=stopped enabled=yes
+
+- name: Make sure chrony is started up
+  service: name=chronyd state=started enabled=yes
+
+- name: Sync hwclock
+  shell: hwclock -w

@@ -1,0 +1,7 @@
+
+- name: Install the packer ssh public key
+  authorized_key:
+    user: labansible
+    state: present
+    exclusive: yes
+    key: "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEA1J21NjOumeG3itMtB2jshf4cdV71+7IzH2JRr8L1GIvwJNif00jitlN6eIKDxgkqS5WuYtj7WqkSaQQo2XDG9QGxVTH5MrgnGb45ubmtF1UmVFv73q8281hfxVeOHhfuWPrKcizmAnBFzzcShDefjHzLyOsgNrMEdydeVeH+P6+rDzCQeyvSpIL0t3GzV4hVVrkNCZfzTaYj/k74hEH8qdNzxodqFZFI1auBxo51n7FOLI/r6cP57WjnKjDhPWeLbWUrShZLtXvxcJeS6fxcAobIqy5uuaJ6qsq/VyzPg9T+3Z87d/3BjwrzsJ8rY3Oct6CNmnOBfaxUS3ETcALE1w== rsa-key-20180513"

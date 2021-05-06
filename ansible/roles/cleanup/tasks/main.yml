@@ -1,0 +1,125 @@
+---
+- name: Clean the /var/spool/abrt directories
+  file: path=/var/spool/abrt/* force=yes state=absent
+
+- name: Clean up the bash history  unset HISTFILE
+  shell: unset HISTFILE
+
+- name: Clean up the bash history
+  shell: history -cw
+
+- name: Clean the bash history, dhclient and iptables directories
+  file: path="{{ item }}" force=yes state=absent
+  with_items:
+    - /root/.bash_history
+    - /home/*/.bash_history
+    - /var/lib/dhclient/*
+    - /etc/sysconfig/iptables
+
+- name: Clean up Yum
+  shell: yum clean all
+
+- name: Clean the yum cache, dhclient and iptables directories
+  file: path=/var/cache/yum/* force=yes state=absent
+  with_items:
+    - /var/cache/yum/*
+    - /root/.ssh/
+    - /home/*/.ssh/
+
+- name: Remove the Katello facts file from the server
+  file:
+    path: /etc/rhsm/facts/katello.facts
+    state: absent
+
+- stat: path=/etc/udev/rules.d/75-persistent-net-generator.rules
+  register: file75
+
+- name: Reset the network rules
+  copy: dest=/etc/udev/rules.d/75-persistent-net-generator.rules content='' force=yes
+  when: file75.stat.exists
+
+- stat: path=/etc/udev/rules.d/70-persistent-net.rules
+  register: file70
+
+- name: Reset the network rules
+  copy: dest=/etc/udev/rules.d/70-persistent-net.rules content='' force=yes
+  when: file70.stat.exists
+
+- name: Cleanup and reset cloud-init
+  file: path=/etc/ssh/ssh_*_key force=yes state=absent
+
+- name: Cleanup and reset cloud-init
+  file: path={{ item }} force=yes state=absent
+  with_items:
+    - /var/lib/cloud
+    - /tmp/*
+
+- name:  clean up any files that may have been created
+  file: path={{ item }} force=yes state=absent
+  with_items:
+     - /etc/Pegasus/*.cnf
+     - /etc/Pegasus/*.crt
+     - /etc/Pegasus/*.csr
+     - /etc/Pegasus/*.pem
+     - /etc/Pegasus/*.srl
+     - /root/anaconda-ks.cfg
+     - /root/anaconda-post.log
+     - /root/initial-setup-ks.cfg
+     - /root/install.log
+     - /root/install.log.syslog
+     - /var/cache/fontconfig/*
+     - /var/cache/gdm/*
+     - /var/cache/man/*
+     - /var/lib/AccountService/users/*
+     - /var/lib/fprint/*
+     - /var/lib/logrotate.status
+     - /var/log/*.log*
+     - /var/log/BackupPC/LOG
+     - /var/log/ConsoleKit/*
+     - /var/log/anaconda.syslog
+     - /var/log/anaconda/*
+     - /var/log/apache2/*_log
+     - /var/log/apache2/*_log-*
+     - /var/log/apt/*
+     - /var/log/aptitude*
+     - /var/log/audit/*
+     - /var/log/btmp*
+     - /var/log/ceph/*.log
+     - /var/log/chrony/*.log
+     - /var/log/cron*
+     - /var/log/cups/*_log
+     - /var/log/debug*
+     - /var/log/dmesg*
+     - /var/log/exim4/*
+     - /var/log/faillog*
+     - /var/log/gdm/*
+     - /var/log/glusterfs/*glusterd.vol.log
+     - /var/log/glusterfs/glusterfs.log
+     - /var/log/httpd/*log
+     - /var/log/installer/*
+     - /var/log/jetty/jetty-console.log
+     - /var/log/journal/*
+     - /var/log/lastlog*
+     - /var/log/libvirt/libvirtd.log
+     - /var/log/libvirt/lxc/*.log
+     - /var/log/libvirt/qemu/*.log
+     - /var/log/libvirt/uml/*.log
+     - /var/log/lightdm/*
+     - /var/log/mail/*
+     - /var/log/maillog*
+     - /var/log/messages*
+     - /var/log/ntp
+     - /var/log/ntpstats/*
+     - /var/log/ppp/connect-errors
+     - /var/log/rhsm/*
+     - /var/log/sa/*
+     - /var/log/secure*
+     - /var/log/setroubleshoot/*.log
+     - /var/log/spooler*
+     - /var/log/squid/*.log
+     - /var/log/syslog*
+     - /var/log/tallylog*
+     - /var/log/tuned/tuned.log
+     - /var/log/wtmp*
+     - /var/named/data/named.run
+     - /var/log/cloud-init.log

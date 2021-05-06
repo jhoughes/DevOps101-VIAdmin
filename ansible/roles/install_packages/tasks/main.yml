@@ -1,0 +1,28 @@
+---
+- name: upgrade all packages to the latest version
+  yum: name=* state=latest
+
+
+- name: Ensure necessary packages are installed.
+  yum: 
+    name:
+      - haveged #better random number generator
+      - bash-completion #convenience
+      - sssd #Begin AD Authentication
+      - realmd
+      - oddjob
+      - oddjob-mkhomedir
+      - adcli
+      - samba-common
+      - samba-common-tools
+      - krb5-workstation
+      - openldap-clients
+      - policycoreutils-python #END AD Authentication
+      - open-vm-tools #DUH
+      - pwgen
+    state: latest
+
+- name: Ensure services are enabled on boot
+  service: name={{ item }} enabled=yes
+  with_items:
+    - haveged
