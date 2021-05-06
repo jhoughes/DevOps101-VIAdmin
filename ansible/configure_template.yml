@@ -5,7 +5,6 @@
   gather_facts: yes
 
   roles:
-      - add_sentania_certs
       - install_packages
       - configure_chrony
       - configure_local_accounts

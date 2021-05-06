@@ -18,16 +18,16 @@
 
 `git status`
 
-`code .gitignore`
-
-*Add this to the gitignore file & save*
-`SuperSecretData.md`
-
 `code SampleScript.ps1`
 
 `git add SampleScript.ps1`
 
 `git status`
+
+`code .gitignore`
+
+*Add this to the gitignore file & save*
+`SuperSecretData.md`
 
 `git commit -m 'First commit, add SampleScript'`
 
