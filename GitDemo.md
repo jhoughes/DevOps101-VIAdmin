@@ -1,83 +1,73 @@
-### Add contents to SuperSecretData.md
-`code SuperSecretData.md`
+cat SampleScript.ps1
+cat SuperSecretData.md
 
-#### Insert this
-`UserName`  
-`Password`  
-`AccessKeys`  
-`...`  
-`OhMy`  
+UserName
+Password
+AccessKeys
+...
+OhMy
 
-## Demo - Local Git Only
+#Local Only
 
-`Get-ChildItem`
+Get-ChildItem
 
-`code .`
+code .
 
-`git init`
+git init
 
-`git status`
+git status
 
-`code SampleScript.ps1`
+code SampleScript.ps1
 
-`git add SampleScript.ps1`
+git add SampleScript.ps1
 
-`git status`
+git status
 
-`code .gitignore`
+git commit -m 'First commit, add SampleScript and gitignore'
 
-*Add this to the gitignore file & save*
-`SuperSecretData.md`
-
-`git commit -m 'First commit, add SampleScript'`
-
-`git status`
+git status
 
 ----------------------------
 
-## Demo - Working with Remote Repo
+#Remote Repo
 
-`git clone https://github.com/jhoughes/FromVMsToKubernetes`
+git clone https://github.com/jhoughes/FromVMsToKubernetes
 
-`git log`
+cd FromVMsToKubernetes
 
-`code README`
+git log
 
-*Add Text to file: *  
-`#Adding a note to say hi from Canada 2021 VMUG Virtual UserCon`
+code README
 
-`git status`
+#Adding a note to say hi from 2023 VMUG Virtual Event
 
-`git add .`
+git status
 
-`git status`
+git add .
 
-`git commit -m'Hello from Canada 2021 VMUG Virtual Usercon'`
+git status
 
-`git status`
+git commit -m'Hello from the 2023 VMUG Virtual Event'
 
-`git push`
+git status
 
-`git status`
+git push
+
+git status
 
 ----------------------------
 
-## Demo - Checking Out Branches  
+git clone https://github.com/jhoughes/terraform-vmc-demo
 
-`git clone https://github.com/jhoughes/terraform-vmc-demo`
+cd terraform-vmc-demo
 
-`cd terraform-vmc-demo`
+code .
 
-`code .`
+git branch -a
 
-*Display all branches*  
-`git branch -a`
+git checkout create-sddc
 
-`git checkout`
+git checkout add-nsxt-rules
 
-`git checkout create-sddc`
-
-`git checkout add-nsxt-rules`
-
-`git checkout create-vm`
+git checkout create-vm
 
